@@ -8,7 +8,7 @@ permalink: /
 
 Sharing my ideas for Emerging technologies!
 
-![assets/img/docsy-jekyll.png](assets/img/docsy-jekyll.png)
+![assets/img/scene.jpg](assets/img/scene.jpg)
 
 ## Purpose
 
