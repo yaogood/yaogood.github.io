@@ -58,9 +58,9 @@ color: "#30638e"
 
 # Build settings
 markdown: CommonMarkGhPages  # GFM, Kramdown
-commonmark:
-  options: ["SMART", "FOOTNOTES"]
-  extensions: ["strikethrough", "autolink", "table", "tagfilter"]
+  commonmark:
+    options: ["SMART", "FOOTNOTES"]
+    extensions: ["strikethrough", "autolink", "table", "tagfilter"]
 
 # If you add tags to pages, define this variable to link them to some external search
 # If you want to link to tags locally on the site, leave this commented out
