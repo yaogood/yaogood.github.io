@@ -16,8 +16,11 @@ Sharing my ideas for Emerging technologies!
 
 What are these blogs?
 
-- Computer Science
-  - **Algorightms**
-  - Database
-- Finance
-  - CFA
+* Computer Science \
+&emsp;&emsp;**Algorightms** \
+&emsp;&emsp;Database  \
+Finance \
+&emsp;&emsp;CFA
+
+  
+
