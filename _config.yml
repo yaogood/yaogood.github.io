@@ -29,15 +29,15 @@ baseurl: "https://yaogood.github.io" # the subpath of your site, e.g. /blog
 url: "https://yaogood.github.io" # the base hostname & protocol for your site
 
 # Social (First three Required)
-repo: "https://github.com/vsoch/docsy-jekyll"
-github_user: "vsoch"
-github_repo: "docsy-jekyll"
-github_branch: "master"
+repo: "https://github.com/yaogood/yaogood.github.io"
+github_user: "yaogood"
+github_repo: "yaogood.github.io"
+github_branch: "main"
 
 # Optional
-twitter: vsoch
-linkedin: vsochat
-dockerhub: vanessa
+twitter: 
+linkedin: 
+dockerhub: 
 
 # Should there be feedback buttons at the bottom of pages?
 feedback: true
