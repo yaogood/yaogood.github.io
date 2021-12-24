@@ -40,7 +40,7 @@ linkedin:
 dockerhub: 
 
 # Should there be feedback buttons at the bottom of pages?
-feedback: true
+feedback: false
 
 # Should there be comments at the bottom of pages?
 comments: true
