@@ -1,12 +1,12 @@
 ---
 layout: page
-title: Docsy Jekyll Theme
+title: Young Forever
 permalink: /
 ---
 
-# Welcome to Docsy Jekyll
+# Welcome to Young Forever's Blog
 
-This is a starter template for a docsy jekyll theme.
+Sharing my ideas for Emerging technologies!
 
 ![assets/img/docsy-jekyll.png](assets/img/docsy-jekyll.png)
 
