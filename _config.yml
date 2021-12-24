@@ -42,6 +42,9 @@ dockerhub:
 # Should there be feedback buttons at the bottom of pages?
 feedback: true
 
+# Should there be comments at the bottom of pages?
+comments: true
+
 # Link to a privacy policy in footer, uncomment and define if wanted
 # privacy: https://domain.com/privacy
 
