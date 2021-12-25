@@ -1,6 +1,16 @@
-- title: Documentation
+
+- title: Blogs
   url: docs
   links:
+    - title: Algorithms
+      url: docs/algorithms/
+      links:
+        - title: Dynamic Programming
+          url: docs/algorithms/dynamic_programming
+          children:
+            - title: TEST
+              url: docs/algorithms/dynamic_programming#TEST
+
     - title: "Getting Started"
       url: "docs/getting-started"
       children:
@@ -12,12 +22,16 @@
           url: "docs/getting-started#customization"
     - title: "About"
       url: "about"
-    - title: "News"
-      url: "news"
-- title: "Extras"
+    
+- title: "News"
+  url: "news"
+
+- title: Others
   url: "docs/extras"
   links:
     - title: Quizzes
       url: "docs/extras/example-quiz"
     - title: Tags Page
       url: "tags"
+    
+  

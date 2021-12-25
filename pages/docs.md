@@ -1,19 +1,22 @@
 ---
 layout: page
-title: Documentation
+title: Blogs
 permalink: /docs/
 ---
 
-# Documentation
+# Blogs
 
-Welcome to the {{ site.title }} Documentation pages! Here you can quickly jump to a 
+Welcome to my website! Here you can quickly jump to a 
 particular page.
 
 <div class="section-index">
     <hr class="panel-line">
-    {% for post in site.docs  %}        
-    <div class="entry">
-    <h5><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h5>
-    <p>{{ post.description }}</p>
-    </div>{% endfor %}
+    {% for post in site.docs  %} 
+        {% if post.level == 'one' %}
+            <div class="entry">
+            <h5><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h5>
+            <p>{{ post.description }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>

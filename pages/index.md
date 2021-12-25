@@ -19,7 +19,7 @@ What are these blogs?
 <div class="code-example" markdown="1">
 
 - Item 1
-- Item 2
+    - Item 2
 - Item 3
 
 _or_
@@ -27,6 +27,7 @@ _or_
 * Item 1
 * Item 2
 * Item 3
+
 </div>
 
 Computer Science \
@@ -34,6 +35,3 @@ Computer Science \
 &emsp;&emsp;Database  \
 Finance \
 &emsp;&emsp;CFA
-
-  
-
