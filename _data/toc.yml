@@ -7,9 +7,15 @@
       links:
         - title: Dynamic Programming
           url: docs/algorithms/dynamic_programming
-          children:
-            - title: TEST
-              url: docs/algorithms/dynamic_programming#TEST
+          links: 
+            - title: 0-1pack
+              url: 0-1pack.md
+
+        - title: Shortest Path
+          url: docs/algorithms/shortest_path
+          
+          
+
 
     - title: "Getting Started"
       url: "docs/getting-started"
