@@ -7,6 +7,8 @@
   </form>  
   
   <nav class="collapse td-sidebar-nav pt-2 pl-4" id="td-file-nav">
+
+    <!-- level0 -->
     {% for dir_level0 in site.data.toc %}
       <ul class="td-sidebar-nav__section pr-md-3">
         {% capture dir_level0_url %} 
@@ -24,39 +26,37 @@
           <ul>
             <li class="collapse show" id="{{ dir_level0.title | slugify }}">
               <ul class="td-sidebar-nav__section pr-md-3">
-
+                
+                <!-- level1 -->
                 {% for dir_level1 in dir_level0.links %}
                   <li class="td-sidebar-nav__section-title">
                     <a href="{% if dir_level1.url %} {{ site.baseurl }}/{{ dir_level1.url }}{% else %}{{ dir_level1.external_url }}{% endif %}" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">{{ dir_level1.title }}</a>
                   </li>
                   
-
                   {% if page.url contains dir_level1.url or pageUrl == dir_level0_url %}
-                  
                     {% if dir_level1.links %}
                       <ul>
                         <li class="collapse show" id="{{ dir_level1.title | slugify }}">
                           <ul class="td-sidebar-nav__section pr-md-3">
-
+                            
+                            <!-- level2 -->
                             {% for dir_level2 in dir_level1.links %}
                               <li class="td-sidebar-nav__section-title">
                                 <a href="{% if dir_level2.url %} {{ site.baseurl }}/{{ dir_level2.url }}{% else %}{{ dir_level2.external_url }}{% endif %}" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">{{ dir_level2.title }}</a>
                               </li>
                               
-                              
-
                               {% if page.url contains dir_level2.url or pageUrl == dir_level0_url %}
-                  
                                 {% if dir_level2.links %}
                                   <ul>
                                     <li class="collapse show" id="{{ dir_level2.title | slugify }}">
                                       <ul class="td-sidebar-nav__section pr-md-3">
 
+                                        <!-- level3 -->
                                         {% for dir_level3 in dir_level2.links %}
                                           <li class="td-sidebar-nav__section-title">
                                             <a href="{% if dir_level3.url %} {{ site.baseurl }}/{{ dir_level3.url }}{% else %}{{ dir_level3.external_url }}{% endif %}" class="align-left pl-0 pr-2 td-sidebar-link td-sidebar-link__section">{{ dir_level3.title }}</a>
                                           </li>
-                                        % endfor %}
+                                        {% endfor %}
                                       </ul>
                                     </li>
                                   </ul>

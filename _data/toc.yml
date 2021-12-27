@@ -8,11 +8,14 @@
         - title: Dynamic Programming
           url: docs/algorithms/dynamic_programming
           links: 
-            - title: 0-1pack
-              url: 0-1pack.md
+            - title: 背包问题 - Knapsack
+              url: docs/algorithms/dynamic_programming/knapsack
 
         - title: Shortest Path
           url: docs/algorithms/shortest_path
+
+        - title: graph
+          url: docs/algorithms/graph
           
           
 
