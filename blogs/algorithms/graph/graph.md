@@ -3,12 +3,11 @@ title: Graph
 description: Introduction for graph representations, BFS and DFS, as well as their applications
 level: three
 cat: graph
-with_comments: True
 ---
 
 # Graph
 
-## Graph and its representations
+## Representations
 
 A graph is a data structure that consists of the following two components:
 
@@ -44,48 +43,41 @@ Time Complexity: $O(V+E)$.
 
 The below code, for simplicity, assumes that all vertices are reachable from the starting vertex. In Disconnected graph, some vertices may not be reachable from a given vertex. We can modify the BFS function to do traversal starting from all nodes one by one (Like the DFS modified version).
 
-{% highlight python %}
-
-# This class represents a directed graph using adjacency list representation
-
+```python
 class Graph:
+    def __init__(self):
+        self.vertices = set()
+        self.graph = defaultdict(list)
 
+    def creatGraph(self, u, v):
+        self.vertices.add(u)
+        self.vertices.add(v)
+        self.graph[u].append(v)
+
+    def BFS(self, s):
+        # Mark all the vertices as not visited
+        visited = [False] * (max(self.graph) + 1)
+
+        # Create a queue for BFS
+        queue = []
+
+        # Mark the source node as visited and enqueue it
+        queue.append(s)
+        visited[s] = True
+
+        while queue:
+
+            # Dequeue a vertex from queue and print it
+            s = queue.pop(0)
+            print (s, end = " ") # do some operations
+
+            # Get all adjacent vertices of the dequeued vertex s.
+            # If a adjacent has not been visited, then mark it visited and enqueue it
+            for i in self.graph[s]:
+                if visited[i] == False:
+                    queue.append(i)
+                    visited[i] = True
 ```
-def __init__(self):
-    self.vertices = set()
-    self.graph = defaultdict(list)
-
-def creatGraph(self, u, v):
-    self.vertices.add(u)
-    self.vertices.add(v)
-    self.graph[u].append(v)
-
-def BFS(self, s):
-    # Mark all the vertices as not visited
-    visited = [False] * (max(self.graph) + 1)
-
-    # Create a queue for BFS
-    queue = []
-
-    # Mark the source node as visited and enqueue it
-    queue.append(s)
-    visited[s] = True
-
-    while queue:
-
-        # Dequeue a vertex from queue and print it
-        s = queue.pop(0)
-        print (s, end = " ") # do some operations
-
-        # Get all adjacent vertices of the dequeued vertex s.
-        # If a adjacent has not been visited, then mark it visited and enqueue it
-        for i in self.graph[s]:
-            if visited[i] == False:
-                queue.append(i)
-                visited[i] = True
-```
-
-{% endhighlight %}
 
 ## Depth First Search or DFS for a Graph
 
@@ -93,10 +85,9 @@ Time complexity: $O(V + E)$.
 
 Depth First Traversal (or Search) for a graph is similar to Depth First Traversal of a tree. The only catch here is, unlike trees, graphs may contain cycles (a node may be visited twice). To avoid processing a node more than once, use a boolean visited array. The algorithm starts at the root node or any arbitrary node and 1) mark the node, and 2) move to the adjacent unmarked node and continue this loop until there is no unmarked adjacent node. Then 3) backtrack and check for other unmarked nodes and traverse them. 4) Finally, print the nodes in the path. Create a recursive function that takes the index of the node and a visited array.
 
-{% highlight python %}
+```python
 class Graph:
-
-```
+    
 def __init__(self):
     self.graph = defaultdict(list)
 
@@ -119,8 +110,6 @@ def DFS(self, v):
     # Call the recursive helper function to print DFS traversal
     self.DFSUtil(v, visited)
 ```
-
-{% endhighlight %}
 
 Q: How to handle a Disconnected Graph?
 
@@ -178,67 +167,63 @@ A directed graph is strongly connected if there is a path between all pairs of v
 ![](image/graph/1640576478927.png)
 ![](image/graph/1640576528549.png)
 
-{% highlight python %}
-class Graph:
+```python
+    class Graph:
+    def __init__(self, vertices):
+        self.V= vertices # No. of vertices
+        self.graph = defaultdict(list) # default dictionary to store graph
 
-```
-def __init__(self, vertices):
-    self.V= vertices # No. of vertices
-    self.graph = defaultdict(list) # default dictionary to store graph
+    def addEdge(self, u, v):
+        self.graph[u].append(v)
 
-def addEdge(self, u, v):
-    self.graph[u].append(v)
+    def DFSUtil(self, v, visited):
+        visited[v]= True
+        print v,
+        for i in self.graph[v]:
+            if visited[i]==False:
+                self.DFSUtil(i,visited)
 
-def DFSUtil(self, v, visited):
-    visited[v]= True
-    print v,
-    for i in self.graph[v]:
-        if visited[i]==False:
-            self.DFSUtil(i,visited)
+    def fillOrder(self, v, visited, stack):
+        visited[v]= True
+        # Recur for all the vertices adjacent to this vertex
+        for i in self.graph[v]:
+            if visited[i]==False:
+                self.fillOrder(i, visited, stack)
+        stack = stack.append(v)  # 在递归调用之后将顶点压入栈
 
-def fillOrder(self, v, visited, stack):
-    visited[v]= True
-    # Recur for all the vertices adjacent to this vertex
-    for i in self.graph[v]:
-        if visited[i]==False:
-            self.fillOrder(i, visited, stack)
-    stack = stack.append(v)  # 在递归调用之后将顶点压入栈
+    # Function that returns reverse (or transpose) of this graph
+    def getTranspose(self):
+        g = Graph(self.V)
+        # Recur for all the vertices adjacent to this vertex
+        for i in self.graph:
+            for j in self.graph[i]:
+                g.addEdge(j,i)
+        return g
 
-# Function that returns reverse (or transpose) of this graph
-def getTranspose(self):
-    g = Graph(self.V)
-    # Recur for all the vertices adjacent to this vertex
-    for i in self.graph:
-        for j in self.graph[i]:
-            g.addEdge(j,i)
-    return g
+    # The main function that finds and prints all strongly connected components
+    def printSCCs(self):
+        # Create a reversed graph
+        gr = self.getTranspose()
+        stack = []
+        # Mark all the vertices as not visited (For first reversed graph DFS)
+        visited =[False]*(self.V)
+        # Fill vertices in stack according to their finishing times
+        for i in range(self.V):
+            if visited[i]==False:
+                gr.fillOrder(i, visited, stack)
 
-# The main function that finds and prints all strongly connected components
-def printSCCs(self):
-    # Create a reversed graph
-    gr = self.getTranspose()
-    stack = []
-    # Mark all the vertices as not visited (For first reversed graph DFS)
-    visited =[False]*(self.V)
-    # Fill vertices in stack according to their finishing times
-    for i in range(self.V):
-        if visited[i]==False:
-            gr.fillOrder(i, visited, stack)
+        # Mark all the vertices as not visited (For second DFS)
+        visited =[False]*(self.V)
 
-    # Mark all the vertices as not visited (For second DFS)
-    visited =[False]*(self.V)
-
-    # Now process all vertices in order defined by Stack
-    while stack:
-        i = stack.pop()
-        if visited[i] == False:
-            self.DFSUtil(i, visited)
-            print()
+        # Now process all vertices in order defined by Stack
+        while stack:
+            i = stack.pop()
+            if visited[i] == False:
+                self.DFSUtil(i, visited)
+                print()
 ```
 
-{% endhighlight %}
-
-6) **Solving puzzles with only one solution**
+1) **Solving puzzles with only one solution**
 
 Such as mazes. DFS can be adapted to find all solutions to a maze by only including nodes on the current path in the visited set.
 
@@ -286,12 +271,10 @@ Case 3:- Directed Connected Graph : In this case, we have to find a vertex -v in
 
 Algorithm : 1. Do DFS traversal of the given graph. While doing traversal keep track of last finished vertex ‘v’. This step takes O(V+E) time. 2. If there exist mother vertex (or vertices), then v must be one (or one of them). Check if v is a mother vertex by doing DFS/BFS from v. This step also takes O(V+E) time.
 
-{% highlight python %}
+```python
 def findMother(self):
-# visited[] is used for DFS. Initially all are initialized as not visited
-visited = [False]*(self.V)
-
-```
+    # visited[] is used for DFS. Initially all are initialized as not visited
+    visited = [False]*(self.V)
     # To store last finished vertex (or mother vertex)
     v = 0
 
@@ -311,7 +294,5 @@ visited = [False]*(self.V)
     else:
         return v
 ```
-
-{% endhighlight %}
 
 ## Transitive Closure of a Graph using DFS
