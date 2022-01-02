@@ -1,46 +1,53 @@
 
 - title: Blogs
-  url: docs
+  url: blogs
   links:
     - title: Algorithms
-      url: docs/algorithms/
+      url: blogs/algorithms/
       links:
         - title: Dynamic Programming
-          url: docs/algorithms/dynamic_programming
+          url: blogs/algorithms/dynamic_programming
           links: 
             - title: 背包问题 - Knapsack
-              url: docs/algorithms/dynamic_programming/knapsack
-
-        - title: Shortest Path
-          url: docs/algorithms/shortest_path
+              url: blogs/algorithms/dynamic_programming/knapsack
 
         - title: graph
-          url: docs/algorithms/graph
+          url: blogs/algorithms/graph
+          links:
+            - title: graph representation & BFS & DFS
+              url: blogs/algorithms/graph/graph
+            - title: Shortest Path
+              url: blogs/algorithms/graph/shortest_path
           
           
 
 
     - title: "Getting Started"
-      url: "docs/getting-started"
+      url: "blogs/getting-started"
       children:
         - title: Features
-          url: "docs/getting-started#getting-started"
+          url: "blogs/getting-started#getting-started"
         - title: Development
-          url: "docs/getting-started#development"
+          url: "blogs/getting-started#development"
         - title: Customization
-          url: "docs/getting-started#customization"
-    - title: "About"
-      url: "about"
+          url: "blogs/getting-started#customization"
+      
+    - title: Others
+      url: "blogs/others"
+      links:
+        - title: Quizzes
+          url: "blogs/others/example-quiz"
+        - title: Tags Page
+          url: "tags"
+
+
+
+- title: "About"
+  url: "about"
     
 - title: "News"
   url: "news"
 
-- title: Others
-  url: "docs/extras"
-  links:
-    - title: Quizzes
-      url: "docs/extras/example-quiz"
-    - title: Tags Page
-      url: "tags"
+
     
   

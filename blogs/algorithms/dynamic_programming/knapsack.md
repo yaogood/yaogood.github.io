@@ -1,7 +1,8 @@
 ---
 title: Dynamic Programming
 description: Test
-level: two
+level: three
+cat: dynamic_programming
 ---
 # TEST
 

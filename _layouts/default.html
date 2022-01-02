@@ -35,10 +35,10 @@
               <li class="breadcrumb-item active" aria-current="page">
                 <a href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a>
               </li>{% else %}
-              {% if page.url != "/docs/" %}<li class="breadcrumb-item">
+              {% if page.url != "/blogs/" %}<li class="breadcrumb-item">
                 <a
                   href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' }}{% endfor %}">{%
-                  if crumb == "docs" %}Blogs{% else %}{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}{%
+                  if crumb == "blogs" %}Blogs{% else %}{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}{%
                   endif %}</a>
               </li>{% endif %}{% endif %}
               {% endif %}{% endfor %}

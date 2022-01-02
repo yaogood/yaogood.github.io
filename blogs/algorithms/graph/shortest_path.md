@@ -1,7 +1,8 @@
 ---
 title: Shortest Path
 description: Floyd, Dijkstra, Bellman-Ford, SPFA
-level: two
+level: three
+cat: graph
 ---
 
 

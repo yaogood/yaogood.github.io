@@ -1,5 +1,5 @@
 ---
-title: Extras
+title: Others
 description: Extras, including quizzes.
 level: one
 tags:
