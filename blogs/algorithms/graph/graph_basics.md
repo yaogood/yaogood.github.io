@@ -1,19 +1,21 @@
 ---
-title: Graph
+title: Basics
 description: Introduction for graph representations, BFS and DFS, as well as their applications
 level: three
 cat: graph
 ---
 
-# Graph
+# Basics
+
+This is a blog for introducing graph **representations**, **BFS** and **DFS**, as well as their applications
 
 ## Representations
 
 A graph is a data structure that consists of the following two components:
 
-> A finite set of vertices also called as nodes.
->
-> A finite set of ordered pair of the form (u, v) called as edge. The pair of the form (u, v) indicates that there is an edge from vertex u to vertex v. The edges may contain weight/value/cost.
+A finite set of vertices also called as nodes.
+
+A finite set of ordered pair of the form (u, v) called as edge. The pair of the form (u, v) indicates that there is an edge from vertex u to vertex v. The edges may contain weight/value/cost.
 
 有向图 directed graph(di-graph)
 
@@ -269,7 +271,7 @@ Case 2:- Undirected/Directed Disconnected Graph : In this case, there is no moth
 
 Case 3:- Directed Connected Graph : In this case, we have to find a vertex -v in the graph such that we can reach to all the other nodes in the graph through a directed path.
 
-Algorithm : 1. Do DFS traversal of the given graph. While doing traversal keep track of last finished vertex ‘v’. This step takes O(V+E) time. 2. If there exist mother vertex (or vertices), then v must be one (or one of them). Check if v is a mother vertex by doing DFS/BFS from v. This step also takes O(V+E) time.
+Algorithm : 1. Do DFS traversal of the given graph. While doing traversal keep track of last finished vertex **v**. This step takes O(V+E) time. 2. If there exist mother vertex (or vertices), then v must be one (or one of them). Check if v is a mother vertex by doing DFS/BFS from v. This step also takes O(V+E) time.
 
 ```python
 def findMother(self):
@@ -296,3 +298,6 @@ def findMother(self):
 ```
 
 ## Transitive Closure of a Graph using DFS
+
+Given a directed graph, find out if a vertex v is reachable from another vertex u for all vertex pairs (u, v) in the given graph. Here reachable means that there is a path from vertex u to v. The *reachability matrix* is called transitive closure of a graph.
+

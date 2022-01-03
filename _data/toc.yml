@@ -11,11 +11,11 @@
             - title: 背包问题 - Knapsack
               url: blogs/algorithms/dynamic_programming/knapsack
 
-        - title: graph
+        - title: Graph
           url: blogs/algorithms/graph
           links:
-            - title: graph representation & BFS & DFS
-              url: blogs/algorithms/graph/graph
+            - title: Graph Basics
+              url: blogs/algorithms/graph/graph_basics
             - title: Shortest Path
               url: blogs/algorithms/graph/shortest_path
           
