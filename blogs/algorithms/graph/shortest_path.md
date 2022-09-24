@@ -454,5 +454,127 @@ def dijkstra(self, src):
 > 
 > 基于动态规划
 
+Algorithm 
+
+    Input: Graph and a source vertex src
+    Output: Shortest distance to all vertices from src. If there is a negative weight cycle, then shortest distances are not calculated, negative weight cycle is reported.
+    1) Create an array dist[] of size V with all values as infinite except dist[src] where src is source vertex.
+    2) Do following V-1 times where V is the number of vertices in given graph. 
+        a) Do following for each edge u-v 
+        If dist[v] > dist[u] + weight of edge uv, then update dist[v] 
+        dist[v] = dist[u] + weight of edge uv
+    3) This step reports if there is a negative weight cycle in graph. Do following for each edge u-v:
+        If dist[v] > dist[u] + weight of edge uv, then “Graph contains negative weight cycle” 
+
+```python
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices # No. of vertices
+        self.graph = [] # Use list to store all edges in graph
+ 
+    # function to add an edge to graph 
+    def addEdge(self, u, v, w):
+        self.graph.append([u, v, w])
+
+    # The main function that finds shortest distances from src to all other vertices using Bellman-Ford algorithm. The function also detects negative weight cycle
+    def BellmanFord(self, src):
+        # Step 1: Initialize distances from src to all other vertices as INFINITE
+        dist = [sys.maxsize] * self.V
+        dist[src] = 0
+ 
+        # Step 2: Relax all edges |V| - 1 times. A simple shortest path from src to any other vertex can have at-most |V| - 1 edges
+        for _ in range(self.V - 1):
+            # Update dist value and parent index of the adjacent vertices of the picked vertex. Consider only those vertices which are still in queue
+            for u, v, w in self.graph:
+                if dist[u] != sys.maxsize and dist[u] + w < dist[v]:
+                    dist[v] = dist[u] + w
+ 
+        # Step 3: check for negative-weight cycles. The above step guarantees shortest distances if graph doesn't contain negative weight cycle. If we get a shorter path, then there is a cycle.
+        for u, v, w in self.graph:
+            if dist[u] != sys.maxsize and dist[u] + w < dist[v]:
+                print("Graph contains negative weight cycle")
+                return None
+                         
+        return dist
+```
+
+为什么这样就可以了？
+
+**做 n - 1 次已经足够了**。证明如下：
+
+从原点开始走，到第 x 个节点，这中间只有 x - 1 条边（不考虑环路）。如果一个图有 n 个节点，那么即使用最啰嗦的走法，到达一个点顶多需要走 n - 1 条边（不考虑环路）。也就是顶多把所有的节点都经过一遍。
+
+在第一轮对所有的边进行松弛的时候，被松弛的点其实只有从原点可以一步到达的点。其他的点所在的边 Edge( u -> v ) 中，u.distance 都是 ∞，v 无法被松弛。只有 start_point.distance 为 0，Edge( start_point -> v ) 中的 v 才可能被松弛。
+
+以此类推，在第 i 轮中，被松弛的点只可能是距离原点 i 步的点。他们利用到的边是 Edge( vi - 1 -> vi)，其中 vi - 1 在上一轮松弛的过程中已经被松弛过，如果他能到达原点的话，vi - 1.distance 就不会是 ∞。
+
+有些点可能有多种不同的到达方式，并且在第 i 步之前也松弛过。这其实没关系。如果第 i 步是最后一次到达他，所有能用来到达这个点的边都已经被计算机探索过（不然这就不是最后一次到达），所以这次松弛也将是它最后一次被松弛，之后到达他的 distance 就已经是最终结果值了。
+
+根据上面提到的 2，不可能有节点出现 n - 1 步还到达不了的地方，即使一个点有多条路径可以到达（除非这个点真的无法到达），他的最多步数路径上的边也都被计算机探索过了。也就是说，他的最后一次被访问已经发生过，他的 distance 肯定已经是最终结果值了。没有任何一个点可以例外。所以 n - 1 次循环已经足够。
+
+算法中的那个操作为什么要叫「松弛」呢？
+
+根据我们之前对 n - 1 次松弛操作的作用的证明，可以想像，在一遍一遍的循环中，最短路径由假设的 ∞，逐渐减小到最终的结果值。这就好像是一个用 ∞ 距离撑起来的图，最开始张力非常大，马上就要撑爆了的感觉；然后一点一点的释放这些张力，让整个图「松弛」下来。
 
 
+## Shortest Path Faster Algorithm 
+
+> 时间复杂度 **O(k*E)**
+> 
+> 空间复杂度 **O(V+E)**
+> 
+> 有负权边，有负环
+> 
+> 有向图无向图均可使用
+> 
+> 单源最短路算法
+> 
+> 基于Bellman-Ford
+
+Bellman-Ford算法属于一种暴力的算法，即，每次将所有的边都松弛一遍，这样肯定能保证顺序，但是仔细分析不难发现，源点s到达其他的点的最短路径中的第一条边，必定是源点s与s的邻接点相连的边，因此，第一次松弛，我们只需要将这些边松弛一下即可。第二条边必定是第一次松弛的时候的邻接点与这些邻接点的邻接点相连的边。因此我们可以这样进行优化：设置一个队列，初始的时候将源点s放入，然后s出队，松弛s与其邻接点相连的边，**将松弛成功的点放入队列中**，然后再次取出队列中的点，松弛该点与该点的邻接点相连的边，如果松弛成功，看这个邻接点是否在队列中，没有则进入，有则不管，这里要说明一下，如果发现某点u的邻接点v已经在队列中，那么将点v再次放到队列中是没有意义的。因为即时你不放入队列中，点v的邻接点相连的边也会被松弛，只有松弛成功的边相连的邻接点，且这个点没有在队列中，这时候稍后对其进行松弛才有意义。因为该点已经更新，需要重新松弛。
+
+The shortest path faster algorithm is based on Bellman-Ford algorithm where every vertex is used to relax its adjacent vertices but in SPF algorithm, a queue of vertices is maintained and a vertex is added to the queue only if that vertex is relaxed. This process repeats until no more vertex can be relaxed. 
+
+    1) Create an array d[] to store the shortest distance of all vertex from the source vertex. Initialize this array by infinity except for d[S] = 0 where S is the source vertex.
+    2) Create a queue Q and push starting source vertex in it. 
+        while Queue is not empty, do the following for each edge(u, v) in the graph 
+        A) If d[v] > d[u] + weight of edge(u, v)
+        b) d[v] = d[u] + weight of edge(u, v)
+        c) If vertex v is not present in Queue, then push the vertex v into the Queue.
+
+```python
+# Function to compute the SPF algorithm
+def shortestPathFaster(src, V):
+ 
+    # Create array d to store shortest distance
+    d = [sys.maxsize]*V
+    in_queue = [False]*V # Boolean array to check if vertex is present in queue or not
+    q = deque()
+    
+    d[src] = 0
+    in_queue[src] = True
+    q.append(src)
+    n = 0 # used to check if there are negtive circles
+
+    while q and n < V-1:
+        # Take the front vertex from Queue
+        u = q.popleft()
+        in_queue[u] = False
+ 
+        # Relaxing all the adjacent edges of vertex taken from the Queue
+        for v, weight in graph[u]:
+            if (d[v] > d[u] + weight):
+                d[v] = d[u] + weight
+                # Check if vertex v is in Queue or not, if not then append it into the Queue
+                if (in_queue[v] == False):
+                    q.append(v)
+                    in_queue[v] = True
+
+        n += 1
+    
+    if n == V-1 and q:
+        print("Graph contains negative weight cycle")
+        return None
+
+    return d
+```
